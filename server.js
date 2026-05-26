@@ -46,7 +46,7 @@ app.post('/api/submit-application', async (req, res) => {
         if (error) throw error;
 
         // 2. Format a professional text message for the sales agent's WhatsApp layout
-        const whatsappMessage = `*NEW BODA FINANCING APPLICATION*\n\n` +
+        const whatsappMessage = `*moggo*\n\n` +
                                 `• *Name:* ${fullName}\n` +
                                 `• *ID Number:* ${nationalId}\n` +
                                 `• *Phone:* ${phone}\n` +
