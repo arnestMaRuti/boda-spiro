@@ -15,13 +15,13 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Initialize your Supabase database client using secret environment variables
 const supabase = createClient(
-    process.env.SUPABASE_URL || '',
-    process.env.SUPABASE_ANON_KEY || ''
+    process.env.SUPABASE_URL || 'https://fezdfarrseinuumqzqqs.supabase.co',
+    process.env.SUPABASE_ANON_KEY || 'sb_publishable_JbgZpfcy3uJeGQko4zO62w_KN0n3ooC'
 );
 
 // Target Sales Agent Phone Number for WhatsApp Redirect
 // Change this to your business or agent WhatsApp number (Include country code, no '+' sign)
-const SALES_AGENT_WHATSAPP = "254712345678"; 
+const SALES_AGENT_WHATSAPP = "254780547049"; 
 
 // ROUTE 1: Serves your motorbike application form page to the user browser
 app.get('/apply', (req, res) => {
