@@ -5,25 +5,21 @@ require('dotenv').config();
 
 const app = express();
 
-// Handle incoming form data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Configure EJS template engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Initialize your Supabase database client using secret environment variables
+// Initialize your Supabase database client
 const supabase = createClient(
-    process.env.SUPABASE_URL || 'https://fezdfarrseinuumqzqqs.supabase.co',
-    process.env.SUPABASE_ANON_KEY || 'sb_publishable_JbgZpfcy3uJeGQko4zO62w_KN0n3ooC'
+    process.env.SUPABASE_URL || '',
+    process.env.SUPABASE_ANON_KEY || ''
 );
 
-// Target Sales Agent Phone Number for WhatsApp Redirect
-// Change this to your business or agent WhatsApp number (Include country code, no '+' sign)
-const SALES_AGENT_WHATSAPP = "254780547049"; 
+// Target Sales Agent Phone Number for WhatsApp Redirect (Put your number here)
+const SALES_AGENT_WHATSAPP = "254712345678"; 
 
-// ROUTE 1: Serves your motorbike application form page to the user browser
+// ROUTE 1: Serves your motorbike application form page
 app.get('/apply', (req, res) => {
     res.render('apply');
 });
@@ -61,11 +57,9 @@ app.post('/api/submit-application', async (req, res) => {
                                 `• *Payment Plan:* ${paymentPlan}\n\n` +
                                 `Please review my application profile details.`;
 
-        // 3. Cleanly encode the message so spaces and bullet points work correctly over a web link
         const encodedText = encodeURIComponent(whatsappMessage);
         const whatsappUrl = `https://api.whatsapp.com/send?phone=${SALES_AGENT_WHATSAPP}&text=${encodedText}`;
 
-        // 4. Send the successful status and the customized WhatsApp redirect link back to the front-end
         return res.status(200).json({ success: true, whatsappUrl: whatsappUrl });
 
     } catch (err) {
@@ -74,12 +68,10 @@ app.post('/api/submit-application', async (req, res) => {
     }
 });
 
-// ROUTE 3: Simple redirect if someone just visits the homepage
 app.get('/', (req, res) => {
     res.redirect('/apply');
 });
 
-// Spin up your application server container
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Motorbike onboarding server active on port ${PORT}`);
