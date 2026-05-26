@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda Asset Financing Application</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #e67e22; /* High-visibility safety orange typical for boda branding */
+            --bg-dark: #12141c;
+            --surface-dark: #1a1d29;
+            --text-light: #ffffff;
+            --text-muted: #7f8c8d;
+        }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+        }
+        body { 
+            background-color: var(--bg-dark); 
+            color: var(--text-light); 
+            padding: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .form-container { 
+            width: 100%;
+            max-width: 500px; 
+            background-color: var(--surface-dark); 
+            padding: 2rem; 
+            border-radius: 16px; 
+            border: 1px solid rgba(255,255,255,0.05); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .header { 
+            text-align: center; 
+            margin-bottom: 2rem; 
+        }
+        .header i { 
+            font-size: 3rem; 
+            color: var(--primary-color); 
+            margin-bottom: 0.75rem; 
+        }
+        .header h1 { 
+            font-size: 1.6rem; 
+            font-weight: 700; 
+            letter-spacing: 0.5px;
+        }
+        .header p {
+            color: var(--text-muted); 
+            font-size: 0.9rem; 
+            margin-top: 0.35rem;
+        }
+        .input-group { 
+            margin-bottom: 1.25rem; 
+        }
+        .input-group label { 
+            display: block; 
+            font-size: 0.85rem; 
+            margin-bottom: 0.5rem; 
+            color: var(--text-muted); 
+            font-weight: 500;
+        }
+        .input-group input, .input-group select { 
+            width: 100%; 
+            padding: 0.85rem; 
+            background: #222636; 
+            border: 1px solid rgba(255,255,255,0.1); 
+            border-radius: 8px; 
+            color: #fff; 
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+        .input-group input:focus, .input-group select:focus { 
+            border-color: var(--primary-color); 
+            outline: none; 
+            background: #282d40;
+        }
+        .btn-submit { 
+            width: 100%; 
+            padding: 1.1rem; 
+            background-color: var(--primary-color); 
+            border: none; 
+            border-radius: 8px; 
+            color: white; 
+            font-size: 1.1rem; 
+            font-weight: bold; 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 0.6rem; 
+            transition: background 0.2s, transform 0.1s; 
+        }
+        .btn-submit:hover { 
+            background-color: #d35400; 
+        }
+        .btn-submit:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <div class="header">
+            <i class="fa-solid fa-motorcycle"></i>
+            <h1>Pata Boda Financing</h1>
+            <p>Fill out the application to connect instantly with our agent</p>
+        </div>
+
+        <form id="bodaForm" onsubmit="submitApplication(event)">
+            <div class="input-group">
+                <label for="fullName">Full Name (As shown on your National ID)</label>
+                <input type="text" id="fullName" required placeholder="e.g., John Kamau Omondi">
+            </div>
+
+            <div class="input-group">
+                <label for="nationalId">National ID Number</label>
+                <input type="number" id="nationalId" required placeholder="e.g., 12345678">
+            </div>
+
+            <div class="input-group">
+                <label for="phone">M-Pesa Registered Number</label>
+                <input type="tel" id="phone" required placeholder="e.g., 0712345678">
+            </div>
+
+            <div class="input-group">
+                <label for="kraPin">KRA PIN Number</label>
+                <input type="text" id="kraPin" required placeholder="e.g., A001234567Z" style="text-transform: uppercase;">
+            </div>
+
+            <div class="input-group">
+                <label for="bikeModel">Select Motorbike Model</label>
+                <select id="bikeModel" required>
+                    <option value="">-- Choose Motorbike --</option>
+                    <option value="Bajaj Boxer 150cc">Bajaj Boxer 150cc</option>
+                    <option value="TVS HLX 125cc">TVS HLX 125cc</option>
+                    <option value="Honda Ace CB125">Honda Ace CB125</option>
+                    <option value="Electric Bike (Ampersand/Spiro)">Electric Bike (Ampersand/Spiro)</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="bodaStage">Your Primary Boda Boda Stage</label>
+                <input type="text" id="bodaStage" required placeholder="e.g., Stage Market, Nairobi">
+            </div>
+
+            <div class="input-group">
+                <label for="county">Operation County</label>
+                <select id="county" required>
+                    <option value="">-- Choose County --</option>
+                    <option value="Nairobi">Nairobi</option>
+                    <option value="Mombasa">Mombasa</option>
+                    <option value="Kisumu">Kisumu</option>
+                    <option value="Nakuru">Nakuru</option>
+                    <option value="Kiambu">Kiambu</option>
+                    <option value="Uasin Gishu">Uasin Gishu</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="paymentPlan">Preferred Payment Plan</label>
+                <select id="paymentPlan" required>
+                    <option value="Daily (Ksh 450/day)">Daily (Ksh 450 / Day)</option>
+                    <option value="Weekly (Ksh 3,150/week)">Weekly (Ksh 3,150 / Week)</option>
+                    <option value="Cash Purchase Discount">Full Cash Outright Purchase</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn-submit">
+                <i class="fa-solid fa-paper-plane"></i> Submit & Chat on WhatsApp
+            </button>
+        </form>
+    </div>
+
+    <script>
+        function submitApplication(e) {
+            e.preventDefault();
+
+            // Gather values entered by the user
+            const payload = {
+                fullName: document.getElementById('fullName').value,
+                nationalId: document.getElementById('nationalId').value,
+                phone: document.getElementById('phone').value,
+                kraPin: document.getElementById('kraPin').value.toUpperCase(),
+                bikeModel: document.getElementById('bikeModel').value,
+                bodaStage: document.getElementById('bodaStage').value,
+                county: document.getElementById('county').value,
+                paymentPlan: document.getElementById('paymentPlan').value
+            };
+
+            // Send the information to your server backend api
+            fetch('/api/submit-application', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    // Redirect browser immediately to the WhatsApp link generated by server.js
+                    window.location.href = data.whatsappUrl;
+                } else {
+                    alert("Submission failed: " + data.error);
+                }
+            })
+            .catch(err => {
+                console.error("Network error:", err);
+                alert("An error occurred. Check your network or database link settings.");
+            });
+        }
+    </script>
+</body>
+</html>
